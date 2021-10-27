@@ -1,0 +1,38 @@
+﻿@model ProdottoViewModel
+<h1>Inserisci nuovo prodotto: </h1>
+
+<form method="post">
+    <div class="form-group">
+        <input type="hidden" asp-for="Id" class="form-control" value="0" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Codice"></label>
+        <input asp-for="Codice" class="form-control" />
+        <span asp-validation-for="Codice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Descrizione"></label>
+        <input asp-for="Descrizione" class="form-control" />
+        <span asp-validation-for="Descrizione" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Tipologia"></label>
+        <select asp-for="Tipologia" asp-items="Html.GetEnumSelectList<_Tipologia>()">
+            <option selected>Seleziona una tipologia</option>
+        </select>
+        <span asp-validation-for="Tipologia" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Costo"></label>
+        <input asp-for="Costo" class="form-control" />
+        <span asp-validation-for="Costo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Prezzo"></label>
+        <input asp-for="Prezzo" class="form-control" />
+        <span asp-validation-for="Prezzo" class="text-danger"></span>
+    </div>
+    <input type="submit" value="Salva" class="btn btn-secondary" />
+    <input type="reset" value="Reset" class="btn btn-secondary" />
+    <a class="btn btn-secondary" asp-controller="Prodotti" asp-action="Index" role="button">Indietro</a>
+</form>

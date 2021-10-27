@@ -1,0 +1,35 @@
+﻿@model ProdottoViewModel
+<form method="post">
+    <p>Sei sicuro di voler eliminare questo prodotto: @Model.Id - @Model.Descrizione?</p>
+
+    <div class="form-group">
+        <label asp-for="Id"></label>
+        <input asp-for="Id" class="form-control" readonly />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Descrizione"></label>
+        <input asp-for="Descrizione" class="form-control" readonly />
+        <span asp-validation-for="Descrizione" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Tipologia"></label>
+        <input asp-for="Tipologia" class="form-control" readonly/> 
+    </div>
+    <div class="form-group">
+        <label asp-for="Costo"></label>
+        <input asp-for="Costo" class="form-control" readonly />
+        <span asp-validation-for="Costo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Prezzo"></label>
+        <input asp-for="Prezzo" class="form-control" readonly />
+        <span asp-validation-for="Prezzo" class="text-danger"></span>
+    </div>
+
+
+    <input type="submit" value="Conferma" class="tbn btn-danger" />
+    <a class="btn btn-primary" asp-controller="Prodotti" asp-action="Index" role="button">Annulla</a>
+</form>
