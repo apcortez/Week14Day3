@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Week14Day3.RepositoryEF;
 
 namespace Week14Day3.RepositoryEF.Migrations
 {
     [DbContext(typeof(ProdottoContext))]
-    partial class ProdottoContextModelSnapshot : ModelSnapshot
+    [Migration("20211028122925_2ndMigration")]
+    partial class _2ndMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

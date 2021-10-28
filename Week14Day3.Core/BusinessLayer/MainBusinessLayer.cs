@@ -11,10 +11,12 @@ namespace Week14Day3.Core.BusinessLayer
     public class MainBusinessLayer : IBusinessLayer
     {
         private readonly IProdottoRepository prodottiRepo;
+        private readonly IUtenteRepository utentiRepo;
 
-        public MainBusinessLayer(IProdottoRepository prodotti)
+        public MainBusinessLayer(IProdottoRepository prodotti, IUtenteRepository utenti)
         {
             prodottiRepo = prodotti;
+            utentiRepo = utenti;
         }
 
         public string AddProduct(Prodotto prodotto)
@@ -52,6 +54,15 @@ namespace Week14Day3.Core.BusinessLayer
             productToUpdate.Prezzo = prodotto.Prezzo;
             prodottiRepo.Update(productToUpdate);
             return "Prodotto aggiornato con successo.";
+        }
+
+        public Utente GetAccount(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return null;
+            }
+            return utentiRepo.GetByUsername(username);
         }
 
         public List<Prodotto> GetAllProducts()

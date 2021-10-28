@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,12 +42,15 @@ namespace Week14Day3.Controllers
             return View(prodottoViewModel);
         }
 
+        [Authorize(Policy = "Adm")]
+        [HttpGet]
         public IActionResult Create()
         {
 
             return View();
         }
 
+        [Authorize(Policy = "Adm")]
         [HttpPost]
         public IActionResult Create(ProdottoViewModel prodottoViewModel)
         {
@@ -60,6 +64,7 @@ namespace Week14Day3.Controllers
             return View(prodottoViewModel);
         }
 
+        [Authorize(Policy = "Adm")]
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -69,6 +74,7 @@ namespace Week14Day3.Controllers
             return View(prodottoViewModel);
         }
 
+        [Authorize(Policy = "Adm")]
         [HttpPost]
         public IActionResult Update(ProdottoViewModel prodottoViewModel)
         {
@@ -81,7 +87,7 @@ namespace Week14Day3.Controllers
             return View(prodottoViewModel);
         }
 
-
+        [Authorize(Policy = "Adm")]
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -90,6 +96,7 @@ namespace Week14Day3.Controllers
             return View(prodottoViewModel);
         }
 
+        [Authorize(Policy = "Adm")]
         [HttpPost]
         public IActionResult Delete(ProdottoViewModel prodottoViewModel)
         {

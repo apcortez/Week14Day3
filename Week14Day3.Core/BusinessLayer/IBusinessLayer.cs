@@ -14,7 +14,9 @@ namespace Week14Day3.Core.BusinessLayer
         public string AddProduct(Prodotto prodotto);
         public string DeleteProduct(int id);
         public string EditProduct(Prodotto prodotto);
-        
+
         #endregion
+
+        public Utente GetAccount(string username);
     }
 }

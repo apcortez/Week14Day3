@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Week14Day3.Core.BusinessLayer;
 using Week14Day3.Core.Interfaces;
+using Week14Day3.RepositoryEF;
 using Week14Day3.RepositoryEF.Repositories;
 
 namespace Week14Day3
@@ -29,6 +32,24 @@ namespace Week14Day3
             services.AddControllersWithViews();
             services.AddTransient<IBusinessLayer, MainBusinessLayer>();
             services.AddTransient<IProdottoRepository, ProdottoRepository>();
+            services.AddTransient<IUtenteRepository, UtenteRepository>();
+
+            services.AddDbContext<ProdottoContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("EFConnection"));
+            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Utenti/Login");
+                    option.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Utenti/Forbidden");
+                });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Adm", policy => policy.RequireRole("Administrator"));
+                options.AddPolicy("User", policy => policy.RequireRole("User"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +70,7 @@ namespace Week14Day3
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
